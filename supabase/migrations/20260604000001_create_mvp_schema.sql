@@ -7,8 +7,8 @@ CREATE TABLE products (
   name TEXT NOT NULL,
   sku TEXT UNIQUE NOT NULL,
   size_inches INTEGER NOT NULL,
-  unit_price_retail DECIMAL(10, 2) NOT NULL,
-  unit_price_wholesale DECIMAL(10, 2) NOT NULL,
+  unit_price_retail DECIMAL(10, 2) NOT NULL CHECK (unit_price_retail > 0),
+  unit_price_wholesale DECIMAL(10, 2) NOT NULL CHECK (unit_price_wholesale > 0),
   reorder_threshold INTEGER DEFAULT 100,
   reorder_quantity INTEGER DEFAULT 500,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -26,9 +26,10 @@ CREATE TABLE inventory_batches (
   quantity_received INTEGER NOT NULL CHECK (quantity_received >= 0),
   quantity_current INTEGER NOT NULL CHECK (quantity_current >= 0),
   received_date DATE NOT NULL DEFAULT CURRENT_DATE,
-  cost_per_unit DECIMAL(10, 2) NOT NULL,
+  cost_per_unit DECIMAL(10, 2) NOT NULL CHECK (cost_per_unit > 0),
   notes TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  CHECK (quantity_current <= quantity_received)
 );
 
 -- Index for FIFO queries (oldest batches first with stock)
@@ -56,12 +57,12 @@ CREATE TABLE sales (
   sale_number TEXT UNIQUE NOT NULL,
   cashier_id UUID NOT NULL REFERENCES users(id),
   sale_date TIMESTAMPTZ DEFAULT NOW(),
-  subtotal DECIMAL(10, 2) NOT NULL,
-  tax_total DECIMAL(10, 2) NOT NULL,
-  grand_total DECIMAL(10, 2) NOT NULL,
+  subtotal DECIMAL(10, 2) NOT NULL CHECK (subtotal >= 0),
+  tax_total DECIMAL(10, 2) NOT NULL CHECK (tax_total >= 0),
+  grand_total DECIMAL(10, 2) NOT NULL CHECK (grand_total >= 0),
   payment_method payment_method NOT NULL,
   payment_status payment_status DEFAULT 'paid',
-  amount_paid DECIMAL(10, 2) NOT NULL,
+  amount_paid DECIMAL(10, 2) NOT NULL CHECK (amount_paid >= 0),
   notes TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -74,7 +75,7 @@ CREATE TABLE sale_items (
   batch_id UUID NOT NULL REFERENCES inventory_batches(id),
   quantity INTEGER NOT NULL CHECK (quantity > 0),
   unit_price DECIMAL(10, 2) NOT NULL,
-  line_total DECIMAL(10, 2) NOT NULL,
+  line_total DECIMAL(10, 2) NOT NULL CHECK (line_total >= 0),
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -83,20 +84,25 @@ CREATE INDEX idx_sales_date ON sales(sale_date DESC);
 CREATE INDEX idx_sales_cashier ON sales(cashier_id);
 CREATE INDEX idx_sale_items_sale ON sale_items(sale_id);
 
--- Function to generate sale number: SALE-YYYYMMDD-####
+-- Function to generate sale number: SALE-YYYYMMDD-#### (race-condition free)
 CREATE OR REPLACE FUNCTION generate_sale_number()
 RETURNS TEXT AS $$
 DECLARE
   today_date TEXT;
   sequence_num INTEGER;
   sale_num TEXT;
+  seq_name TEXT;
 BEGIN
   today_date := TO_CHAR(NOW(), 'YYYYMMDD');
+  seq_name := 'sale_seq_' || today_date;
 
-  -- Get count of sales today and increment
-  SELECT COUNT(*) + 1 INTO sequence_num
-  FROM sales
-  WHERE sale_number LIKE 'SALE-' || today_date || '-%';
+  -- Create sequence for today if it doesn't exist
+  IF NOT EXISTS (SELECT 1 FROM pg_class WHERE relname = seq_name AND relkind = 'S') THEN
+    EXECUTE format('CREATE SEQUENCE %I', seq_name);
+  END IF;
+
+  -- Get next sequence number atomically
+  EXECUTE format('SELECT nextval(%L)', seq_name) INTO sequence_num;
 
   sale_num := 'SALE-' || today_date || '-' || LPAD(sequence_num::TEXT, 4, '0');
 
