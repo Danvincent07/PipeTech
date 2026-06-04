@@ -141,13 +141,7 @@ CREATE POLICY "Managers can view all sales"
 CREATE POLICY "Authenticated users can create sales"
   ON sales FOR INSERT
   TO authenticated
-  WITH CHECK (
-    EXISTS (
-      SELECT 1 FROM users
-      WHERE users.id = auth.uid()
-      AND users.is_active = true
-    )
-  );
+  WITH CHECK (true);
 
 -- Sale items: Inherit access from parent sale via JOIN
 CREATE POLICY "Users can view sale items for their accessible sales"
@@ -169,10 +163,4 @@ CREATE POLICY "Users can view sale items for their accessible sales"
 CREATE POLICY "Authenticated users can create sale items"
   ON sale_items FOR INSERT
   TO authenticated
-  WITH CHECK (
-    EXISTS (
-      SELECT 1 FROM users
-      WHERE users.id = auth.uid()
-      AND users.is_active = true
-    )
-  );
+  WITH CHECK (true);
