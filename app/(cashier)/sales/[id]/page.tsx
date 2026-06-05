@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { PrintButton } from './print-button';
 
 interface SaleDetailsPageProps {
   params: {
@@ -272,6 +273,11 @@ export default async function SaleDetailsPage({ params }: SaleDetailsPageProps) 
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Print Receipt */}
+          <div>
+            <PrintButton sale={sale} />
           </div>
         </div>
       </div>
