@@ -149,28 +149,16 @@ export async function completeSale(data: CompleteSaleData) {
         }
 
         // 5. Update batch inventory (FIFO deduction)
-        const { error: batchError } = await supabase.rpc('execute_sql', {
-          sql: `
-            UPDATE inventory_batches
-            SET quantity_current = quantity_current - ${allocation.quantity}
-            WHERE id = '${allocation.batchId}'
-          `,
-        });
-
-        // Fallback if RPC doesn't exist - direct update
-        if (batchError) {
-          const { error: updateError } = await supabase
-            .from('inventory_batches')
-            .update({
-              quantity_current: supabase.raw(
-                `quantity_current - ${allocation.quantity}`
-              ),
-            })
-            .eq('id', allocation.batchId);
-
-          if (updateError) {
-            throw new Error('Failed to update batch inventory');
+        const { error: batchError } = await supabase.rpc(
+          'deduct_batch_inventory',
+          {
+            p_batch_id: allocation.batchId,
+            p_quantity: allocation.quantity,
           }
+        );
+
+        if (batchError) {
+          throw new Error(`Failed to update batch inventory: ${batchError.message}`);
         }
       }
     }

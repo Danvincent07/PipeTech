@@ -105,16 +105,15 @@ export default async function SalesPage() {
                       ₱{sale.grand_total.toFixed(2)}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button
-                        asChild
-                        size="sm"
-                        className="border-2 border-[#2C7DA0] bg-[#2C7DA0] font-bold uppercase tracking-tight text-white shadow-lg hover:bg-[#2C7DA0]/90"
-                      >
-                        <Link href={`/sales/${sale.id}`}>
+                      <Link href={`/sales/${sale.id}`}>
+                        <Button
+                          size="sm"
+                          className="border-2 border-[#2C7DA0] bg-[#2C7DA0] font-bold uppercase tracking-tight text-white shadow-lg hover:bg-[#2C7DA0]/90"
+                        >
                           <Eye className="mr-1 h-4 w-4" />
                           View
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))

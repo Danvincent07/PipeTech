@@ -15,7 +15,7 @@ export function PrintButton({ sale }: PrintButtonProps) {
   const receiptRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
-    content: () => receiptRef.current,
+    contentRef: receiptRef,
     documentTitle: `Receipt-${sale.sale_number}`,
     pageStyle: `
       @page {

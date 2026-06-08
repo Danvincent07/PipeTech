@@ -110,6 +110,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Function to deduct inventory from batch (atomic operation)
+CREATE OR REPLACE FUNCTION deduct_batch_inventory(
+  p_batch_id UUID,
+  p_quantity INTEGER
+)
+RETURNS VOID AS $$
+BEGIN
+  UPDATE inventory_batches
+  SET quantity_current = quantity_current - p_quantity
+  WHERE id = p_batch_id;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Trigger function to update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$

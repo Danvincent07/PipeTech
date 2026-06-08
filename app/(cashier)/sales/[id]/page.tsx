@@ -32,16 +32,15 @@ export default async function SaleDetailsPage({ params }: SaleDetailsPageProps) 
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button
-            asChild
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 border-4 border-[#3B4B5C] shadow-lg"
-          >
-            <Link href="/sales">
+          <Link href="/sales">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-12 w-12 border-4 border-[#3B4B5C] shadow-lg"
+            >
               <ArrowLeft className="h-6 w-6" />
-            </Link>
-          </Button>
+            </Button>
+          </Link>
           <div className="flex h-16 w-16 items-center justify-center rounded-lg border-4 border-[#3B4B5C] bg-[#2C7DA0] shadow-xl">
             <Receipt className="h-8 w-8 text-white" />
           </div>

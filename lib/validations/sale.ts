@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const checkoutSchema = z.object({
   payment_method: z.enum(['cash', 'card'], {
-    required_error: 'Payment method is required',
+    message: 'Payment method is required',
   }),
   amount_tendered: z.coerce.number().positive('Amount must be greater than 0').optional(),
   notes: z.string().max(500, 'Notes must be 500 characters or less').optional(),
