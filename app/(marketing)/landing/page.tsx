@@ -67,15 +67,13 @@ export default function LandingPage() {
 
             {/* Main Heading */}
             <h1
-              className={`mb-6 font-bold text-5xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-slate-900 transition-all duration-700 ${
+              className={`mb-6 font-bold text-5xl sm:text-6xl md:text-7xl leading-tight tracking-tight transition-all duration-700 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: '200ms' }}
             >
-              Modern Point of Sale for
-              <br />
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Construction Materials
+                PipeTech
               </span>
             </h1>
 
