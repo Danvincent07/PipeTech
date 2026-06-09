@@ -1,7 +1,8 @@
-import { LogOut, User, Store } from 'lucide-react';
+import { LogOut, User, Store, Settings } from 'lucide-react';
 import Link from 'next/link';
+import { isManager } from '@/lib/actions/auth';
 
-export default function CashierLayout({
+export default async function CashierLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -36,6 +37,17 @@ export default function CashierLayout({
                 <p className="text-sm font-bold text-white">John Doe</p>
               </div>
             </div>
+
+            {/* Manager Link - Only shown to managers */}
+            {await isManager() && (
+              <Link
+                href="/manager/products"
+                className="flex h-10 items-center gap-2 rounded-lg border-2 border-white/20 bg-transparent px-4 font-bold text-white transition-all hover:bg-white/5 hover:border-white/40"
+              >
+                <Settings className="h-4 w-4" strokeWidth={2.5} />
+                <span className="hidden sm:inline">Manage</span>
+              </Link>
+            )}
 
             {/* Logout Button */}
             <Link
