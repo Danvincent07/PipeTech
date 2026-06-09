@@ -96,10 +96,10 @@ export default function LandingPage() {
               style={{ transitionDelay: '400ms' }}
             >
               <Link
-                href="/pos"
+                href="/login"
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-lg rounded-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 hover:scale-105 transition-all duration-200"
               >
-                Start Free Trial
+                Log In
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
@@ -272,14 +272,14 @@ export default function LandingPage() {
             Join hundreds of construction materials businesses using PipeTech POS to streamline operations
           </p>
           <Link
-            href="/pos"
+            href="/login"
             className="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-700 font-bold text-lg rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-200"
           >
-            Get Started Today
+            Log In Now
             <ArrowRight className="h-6 w-6" />
           </Link>
           <p className="mt-6 text-sm text-blue-200">
-            No credit card required · Free 14-day trial
+            Access your POS system instantly
           </p>
         </div>
       </section>
