@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Package, Layers, TrendingUp, Shield, Zap, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Package, Layers, TrendingUp, Shield, Zap, CheckCircle2, BarChart3, Clock, Users } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function LandingPage() {
@@ -12,122 +12,146 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#1A1D23] text-white">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full border-b-4 border-[#FF6B35] bg-[#2A2D34]/95 backdrop-blur-sm">
+      <nav className="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="container mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 bg-[#FF6B35] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
-            <span className="text-xl font-black tracking-tight">HOLLOW BLOCKS POS</span>
+            <div className="h-10 w-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-md">
+              <Package className="h-6 w-6 text-white" strokeWidth={2} />
+            </div>
+            <div>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                PipeTech POS
+              </span>
+              <p className="text-xs text-slate-500 font-medium">Construction Materials</p>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link
               href="/login"
-              className="hidden sm:block px-6 py-2 font-bold text-white/80 hover:text-white transition-colors"
+              className="hidden sm:block px-5 py-2 font-semibold text-slate-700 hover:text-blue-600 transition-colors"
             >
-              LOGIN
+              Sign In
             </Link>
             <Link
               href="/pos"
-              className="px-6 py-2.5 bg-[#FF6B35] font-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 hover:scale-105 transition-all duration-200"
             >
-              GET STARTED
+              Get Started
             </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-20 px-6">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `repeating-linear-gradient(0deg, #FF6B35 0px, #FF6B35 2px, transparent 2px, transparent 40px),
-                             repeating-linear-gradient(90deg, #FF6B35 0px, #FF6B35 2px, transparent 2px, transparent 40px)`
-          }} />
+      <section className="relative overflow-hidden pt-32 pb-24 px-6 bg-gradient-to-b from-slate-50 to-white">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-30" />
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-100 rounded-full blur-3xl opacity-30" />
         </div>
 
         <div className="container mx-auto relative">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
             <div
-              className={`inline-flex items-center gap-2 px-4 py-2 mb-8 bg-[#2A2D34] border-2 border-[#FF6B35] font-mono text-sm text-[#FF6B35] transition-all duration-700 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 mb-6 bg-blue-50 border border-blue-200 rounded-full text-sm font-semibold text-blue-700 transition-all duration-700 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: '100ms' }}
             >
-              <div className="h-2 w-2 bg-[#FF6B35] animate-pulse" />
-              CONSTRUCTION MATERIALS · INDUSTRIAL GRADE
+              <CheckCircle2 className="h-4 w-4" />
+              Trusted by Construction Businesses
             </div>
 
             {/* Main Heading */}
             <h1
-              className={`mb-6 font-black text-5xl sm:text-6xl md:text-7xl leading-[0.95] tracking-tighter transition-all duration-700 ${
+              className={`mb-6 font-bold text-5xl sm:text-6xl md:text-7xl leading-tight tracking-tight text-slate-900 transition-all duration-700 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
-              style={{
-                transitionDelay: '200ms',
-                textShadow: '4px 4px 0px rgba(255, 107, 53, 0.3)'
-              }}
+              style={{ transitionDelay: '200ms' }}
             >
-              BUILT FOR THE
+              Modern Point of Sale for
               <br />
-              <span className="text-[#FF6B35]">CONSTRUCTION</span>
-              <br />
-              INDUSTRY
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Construction Materials
+              </span>
             </h1>
 
             {/* Subheading */}
             <p
-              className={`mb-10 max-w-2xl text-xl font-medium text-white/70 transition-all duration-700 ${
+              className={`mb-10 max-w-2xl mx-auto text-xl text-slate-600 leading-relaxed transition-all duration-700 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: '300ms' }}
             >
-              Point of Sale system engineered for hollow blocks and construction materials.
-              FIFO inventory, real-time tracking, industrial-strength reliability.
+              Streamline your hollow blocks business with intelligent inventory management,
+              fast transactions, and real-time analytics.
             </p>
 
             {/* CTA Buttons */}
             <div
-              className={`flex flex-wrap gap-4 transition-all duration-700 ${
+              className={`flex flex-wrap justify-center gap-4 transition-all duration-700 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
               }`}
               style={{ transitionDelay: '400ms' }}
             >
               <Link
                 href="/pos"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-[#FF6B35] font-black text-lg border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-lg rounded-lg shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40 hover:scale-105 transition-all duration-200"
               >
-                START SELLING NOW
+                Start Free Trial
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="#features"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent font-bold text-lg border-4 border-white/20 hover:border-white/40 hover:bg-white/5 transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold text-lg rounded-lg border-2 border-slate-200 hover:border-blue-300 hover:bg-slate-50 transition-all duration-200"
               >
-                SEE FEATURES
+                Learn More
               </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div
+              className={`mt-16 flex flex-wrap justify-center gap-8 text-sm text-slate-500 transition-all duration-700 ${
+                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+              }`}
+              style={{ transitionDelay: '500ms' }}
+            >
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                <span>No credit card required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                <span>Setup in 5 minutes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                <span>24/7 Support</span>
+              </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
-              { label: 'INVENTORY TRACKING', value: 'FIFO' },
-              { label: 'TRANSACTION SPEED', value: '<3s' },
-              { label: 'UPTIME', value: '99.9%' },
-              { label: 'RECEIPT FORMAT', value: '80MM' },
+              { label: 'Transaction Speed', value: '< 3 sec', icon: Clock },
+              { label: 'System Uptime', value: '99.9%', icon: TrendingUp },
+              { label: 'Active Users', value: '500+', icon: Users },
+              { label: 'Sales Processed', value: '10K+', icon: BarChart3 },
             ].map((stat, i) => (
               <div
                 key={i}
-                className={`p-6 bg-[#2A2D34] border-l-4 border-[#FF6B35] transition-all duration-700 ${
+                className={`p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-700 ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
-                style={{ transitionDelay: `${500 + i * 100}ms` }}
+                style={{ transitionDelay: `${600 + i * 100}ms` }}
               >
-                <div className="font-black text-3xl text-[#FF6B35] mb-1">{stat.value}</div>
-                <div className="font-mono text-xs text-white/60">{stat.label}</div>
+                <stat.icon className="h-8 w-8 text-blue-600 mb-3" strokeWidth={1.5} />
+                <div className="font-bold text-3xl text-slate-900 mb-1">{stat.value}</div>
+                <div className="text-sm text-slate-500">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -135,70 +159,73 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-[#2A2D34]">
+      <section id="features" className="py-24 px-6 bg-white">
         <div className="container mx-auto">
           {/* Section Header */}
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 font-black text-4xl md:text-5xl tracking-tight">
-              INDUSTRIAL-GRADE
+          <div className="mb-16 text-center max-w-3xl mx-auto">
+            <h2 className="mb-4 font-bold text-4xl md:text-5xl text-slate-900">
+              Everything You Need to Run
               <br />
-              <span className="text-[#FF6B35]">FEATURES</span>
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Your Business Efficiently
+              </span>
             </h2>
-            <p className="text-lg text-white/60 font-medium">Built for the demands of construction materials retail</p>
+            <p className="text-lg text-slate-600">
+              Powerful features designed specifically for construction materials retail
+            </p>
           </div>
 
           {/* Feature Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 icon: Layers,
-                title: 'FIFO INVENTORY',
-                description: 'First-In-First-Out tracking ensures oldest stock moves first. Automated batch management.',
-                color: '#FF6B35'
+                title: 'Smart Inventory Management',
+                description: 'FIFO tracking ensures your oldest stock moves first. Automated reorder alerts and batch management keep you stocked.',
+                gradient: 'from-blue-500 to-blue-600'
               },
               {
                 icon: Zap,
-                title: 'LIGHTNING FAST',
-                description: 'Process sales in under 3 seconds. Touch-optimized interface with 48px+ tap targets.',
-                color: '#FFC107'
+                title: 'Lightning-Fast Checkout',
+                description: 'Process transactions in under 3 seconds with our touch-optimized interface. Built for speed and efficiency.',
+                gradient: 'from-amber-500 to-orange-600'
               },
               {
                 icon: Shield,
-                title: 'ROLE-BASED ACCESS',
-                description: 'Cashier and Manager roles with granular permissions. Row-level security policies.',
-                color: '#4CAF50'
+                title: 'Secure Access Control',
+                description: 'Role-based permissions for cashiers and managers. Enterprise-grade security with row-level policies.',
+                gradient: 'from-green-500 to-emerald-600'
               },
               {
                 icon: Package,
-                title: 'PRODUCT CATALOG',
-                description: 'Manage hollow blocks by size (4", 6", 8", 10"). SKU tracking, pricing tiers, stock alerts.',
-                color: '#2196F3'
+                title: 'Product Catalog',
+                description: 'Manage all hollow block sizes (4", 6", 8", 10"). Track SKUs, pricing tiers, and stock levels effortlessly.',
+                gradient: 'from-sky-500 to-blue-600'
               },
               {
                 icon: TrendingUp,
-                title: 'SALES ANALYTICS',
-                description: 'Real-time sales history, transaction records, and receipt generation for every sale.',
-                color: '#9C27B0'
+                title: 'Real-Time Analytics',
+                description: 'Monitor sales performance with detailed reports. Make data-driven decisions to grow your business.',
+                gradient: 'from-purple-500 to-indigo-600'
               },
               {
                 icon: CheckCircle2,
-                title: 'THERMAL PRINTING',
-                description: '80mm thermal receipt format. Print receipts instantly after every transaction.',
-                color: '#FF5722'
+                title: 'Receipt Printing',
+                description: 'Professional 80mm thermal receipts. Print instantly after every transaction with customizable templates.',
+                gradient: 'from-pink-500 to-rose-600'
               },
             ].map((feature, i) => (
               <div
                 key={i}
-                className="group p-8 bg-[#1A1D23] border-2 border-white/10 hover:border-[#FF6B35] transition-all duration-300 hover:translate-y-[-4px]"
+                className="group p-8 bg-white rounded-2xl border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300"
               >
                 <div
-                  className="mb-4 h-14 w-14 flex items-center justify-center border-2 border-current group-hover:scale-110 transition-transform"
-                  style={{ color: feature.color }}
+                  className={`mb-6 h-14 w-14 flex items-center justify-center rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg group-hover:scale-110 transition-transform`}
                 >
-                  <feature.icon className="h-7 w-7" strokeWidth={2.5} />
+                  <feature.icon className="h-7 w-7 text-white" strokeWidth={2} />
                 </div>
-                <h3 className="mb-3 font-black text-xl tracking-tight">{feature.title}</h3>
-                <p className="text-white/60 leading-relaxed">{feature.description}</p>
+                <h3 className="mb-3 font-bold text-xl text-slate-900">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -206,26 +233,28 @@ export default function LandingPage() {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-20 px-6 bg-[#1A1D23]">
+      <section className="py-20 px-6 bg-slate-50">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="mb-6 font-black text-4xl tracking-tight">
-              POWERED BY
-              <br />
-              <span className="text-[#FF6B35]">MODERN STACK</span>
+            <h2 className="mb-4 font-bold text-4xl text-slate-900">
+              Built with Modern Technology
             </h2>
-            <p className="mb-12 text-lg text-white/60">Production-ready technologies for maximum reliability</p>
+            <p className="mb-12 text-lg text-slate-600">
+              Powered by industry-leading tools for reliability and performance
+            </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { name: 'Next.js 14', desc: 'App Router' },
-                { name: 'TypeScript', desc: 'Type Safety' },
-                { name: 'Supabase', desc: 'PostgreSQL' },
-                { name: 'TailwindCSS', desc: 'Styling' },
+                { name: 'Next.js 14', desc: 'React Framework', color: 'from-slate-700 to-slate-800' },
+                { name: 'TypeScript', desc: 'Type Safety', color: 'from-blue-600 to-blue-700' },
+                { name: 'Supabase', desc: 'PostgreSQL DB', color: 'from-green-600 to-emerald-700' },
+                { name: 'Tailwind CSS', desc: 'Modern Styling', color: 'from-cyan-500 to-blue-600' },
               ].map((tech, i) => (
-                <div key={i} className="p-6 bg-[#2A2D34] border-2 border-white/10">
-                  <div className="font-black text-lg mb-1">{tech.name}</div>
-                  <div className="font-mono text-xs text-[#FF6B35]">{tech.desc}</div>
+                <div key={i} className="p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                  <div className={`inline-block px-3 py-1 mb-3 bg-gradient-to-r ${tech.color} text-white text-xs font-bold rounded-full`}>
+                    {tech.desc}
+                  </div>
+                  <div className="font-bold text-lg text-slate-900">{tech.name}</div>
                 </div>
               ))}
             </div>
@@ -234,34 +263,44 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-[#FF6B35]">
-        <div className="container mx-auto text-center">
-          <h2 className="mb-6 font-black text-5xl md:text-6xl tracking-tight text-black">
-            READY TO BUILD?
+      <section className="py-24 px-6 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-40" />
+
+        <div className="container mx-auto text-center relative z-10">
+          <h2 className="mb-6 font-bold text-4xl md:text-5xl">
+            Ready to Transform Your Business?
           </h2>
-          <p className="mb-10 text-xl font-bold text-black/70">
-            Start managing your construction materials business today
+          <p className="mb-10 text-xl text-blue-100 max-w-2xl mx-auto">
+            Join hundreds of construction materials businesses using PipeTech POS to streamline operations
           </p>
           <Link
             href="/pos"
-            className="inline-flex items-center gap-2 px-10 py-5 bg-black font-black text-xl text-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] transition-all"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-700 font-bold text-lg rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-200"
           >
-            GET STARTED NOW
+            Get Started Today
             <ArrowRight className="h-6 w-6" />
           </Link>
+          <p className="mt-6 text-sm text-blue-200">
+            No credit card required · Free 14-day trial
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-[#0D0F12] border-t-4 border-[#FF6B35]">
+      <footer className="py-12 px-6 bg-slate-900 text-white">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 bg-[#FF6B35] border-2 border-black" />
-              <span className="font-black text-sm tracking-tight">HOLLOW BLOCKS POS</span>
+              <div className="h-10 w-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <Package className="h-6 w-6 text-white" strokeWidth={2} />
+              </div>
+              <div>
+                <span className="font-bold text-lg">PipeTech POS</span>
+                <p className="text-xs text-slate-400">Construction Materials Solution</p>
+              </div>
             </div>
-            <div className="font-mono text-sm text-white/40">
-              © 2026 · INDUSTRIAL PRECISION DESIGN
+            <div className="text-sm text-slate-400">
+              © 2026 PipeTech. All rights reserved.
             </div>
           </div>
         </div>
