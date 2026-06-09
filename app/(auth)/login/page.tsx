@@ -20,7 +20,7 @@ function LoginForm() {
           <CardDescription>Sign in to access the system</CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
+          <form action={login} className="space-y-4">
             {error && (
               <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
                 {error}
@@ -49,11 +49,8 @@ function LoginForm() {
             </div>
 
             <div className="flex gap-2">
-              <Button formAction={login} className="flex-1">
+              <Button type="submit" className="flex-1">
                 Log in
-              </Button>
-              <Button formAction={signup} variant="outline" className="flex-1">
-                Sign up
               </Button>
             </div>
           </form>
